@@ -1,7 +1,35 @@
+version: '3.8'
 
-version: "3.8"
 services:
   backend:
     build: ./backend
     ports:
       - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./content_marketplace.db
+      - WEB3_PROVIDER=http://blockchain:8545
+      - MODEL_PATH=/app/models/content_verifier.pth
+      - CIRCUITS_PATH=/app/circuits
+    volumes:
+      - ./models:/app/models
+      - ./circuits:/app/circuits
+
+  blockchain:
+    image: ethereum/client-go:latest
+    ports:
+      - "8545:8545"
+    command: >
+      --dev
+      --datadir /eth-data
+      --http
+      --http.addr 0.0.0.0
+      --http.port 8545
+      --http.api web3,eth,net,personal
+      --allow-insecure-unlock
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
