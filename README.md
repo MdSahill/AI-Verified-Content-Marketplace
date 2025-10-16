@@ -49,3 +49,8 @@ A decentralized platform where AI tools verify original content creation and min
    ```bash
    git clone https://github.com/your-username/ai-content-marketplace.git
    cd ai-content-marketplace
+2. **Backend Setup**
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   python main.py
