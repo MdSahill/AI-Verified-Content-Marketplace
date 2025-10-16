@@ -54,3 +54,31 @@ A decentralized platform where AI tools verify original content creation and min
    cd backend
    pip install -r requirements.txt
    python main.py
+3. **Blockchain Setup**
+   ```bash
+   # Using Hardhat or Ganache
+   npx hardhat node
+   npx hardhat run scripts/deploy.js --network localhost
+4. **Frontend Setup**
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+### Usage
+1. **Content Verification**
+   ```bash
+   curl -X POST http://localhost:8000/api/v1/verify \
+   -H "Content-Type: application/json" \
+   -d '{
+    "content": "Your original content here",
+    "content_type": "text",
+    "creator_address": "0xYourEthereumAddress"
+   }'
+2. **NFT Minting**
+   ```bash
+   curl -X POST http://localhost:8000/api/v1/mint \
+   -H "Content-Type: application/json" \
+   -d '{
+    "content_hash": "verified_content_hash",
+    "creator_address": "0xYourEthereumAddress"
+   }'
